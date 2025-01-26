@@ -1,0 +1,99 @@
+import React, { useState } from "react";
+
+function SignupForm() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSignup = (event) => {
+    event.preventDefault();
+
+    
+    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
+      alert("Alle feltene må fylles ut.");
+      return;
+    }
+
+    
+    if (password !== confirmPassword) {
+      alert("Passordene samsvarer ikke!");
+      return;
+    }
+
+    
+    console.log("Registrert bruker:", { name, email, password });
+    alert("Registrering fullført!");
+  };
+
+  return (
+    <div className="container max-w-md mx-auto mt-10 p-4 border rounded shadow">
+      <h1 className="text-2xl font-semibold mb-6">Registrer deg</h1>
+      <form onSubmit={handleSignup}>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-sm font-medium mb-2">
+            Navn
+          </label>
+          <input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"
+            placeholder="Skriv inn navnet ditt"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium mb-2">
+            E-post
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"
+            placeholder="Din e-postadresse"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block text-sm font-medium mb-2">
+            Passord
+          </label>
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"
+            placeholder="Lag et passord"
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-sm font-medium mb-2"
+          >
+            Bekreft passord
+          </label>
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-green-200"
+            placeholder="Gjenta passordet"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+        >
+          Registrer deg
+        </button>
+      </form>
+    </div>
+  );
+}
+
+export default SignupForm;
